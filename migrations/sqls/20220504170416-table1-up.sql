@@ -1,7 +1,6 @@
-CREATE TABLE users (
+CREATE TABLE order_products (
     id SERIAL PRIMARY KEY,
-    firstname VARCHAR(64) NOT NULL,
-    lastName VARCHAR(64) NOT NULL,
-    password VARCHAR(64) NOT NULL
+    product_id BIGINT REFERENCES products(id),
+    order_id BIGINT REFERENCES orders(id),
+    quantity INTEGER NOT NULL
 )
-

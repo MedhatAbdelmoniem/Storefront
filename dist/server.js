@@ -15,3 +15,4 @@ app.use('/', users_1["default"]);
 app.use('/', products_1["default"]);
 app.use('/', orders_1["default"]);
 app.listen(3000);
+exports["default"] = app;

@@ -13,4 +13,16 @@ export class OrdersStore {
         }
 
     }
+
+    async addProduct(quantity: number, orderID: number, productID: number){
+        try {
+            const conn = await client.connect();
+            const sql = `INSERT INTO order_products (quantity, order_id, product_id) VALUES (${quantity}, '${orderID}', '${productID}');`;
+            const result = await conn.query(sql);
+            conn.release();
+            return result.rows;
+        } catch (err) {
+            throw new Error(`${err}`)
+        }
+    }
 }

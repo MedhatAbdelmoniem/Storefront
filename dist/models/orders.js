@@ -68,6 +68,30 @@ var OrdersStore = /** @class */ (function () {
             });
         });
     };
+    OrdersStore.prototype.addProduct = function (quantity, orderID, productID) {
+        return __awaiter(this, void 0, void 0, function () {
+            var conn, sql, result, err_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 3, , 4]);
+                        return [4 /*yield*/, client_1["default"].connect()];
+                    case 1:
+                        conn = _a.sent();
+                        sql = "INSERT INTO order_products (quantity, order_id, product_id) VALUES (".concat(quantity, ", '").concat(orderID, "', '").concat(productID, "');");
+                        return [4 /*yield*/, conn.query(sql)];
+                    case 2:
+                        result = _a.sent();
+                        conn.release();
+                        return [2 /*return*/, result.rows];
+                    case 3:
+                        err_2 = _a.sent();
+                        throw new Error("".concat(err_2));
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return OrdersStore;
 }());
 exports.OrdersStore = OrdersStore;
