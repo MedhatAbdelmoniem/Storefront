@@ -24,7 +24,7 @@ export class UsersStore {
     async show(id : number){
         try{
             const conn = await client.connect();
-            const sql = `SELECT * FROM users WHERE id="${id}";`;
+            const sql = `SELECT * FROM users WHERE id='${id}';`;
             const result = await conn.query(sql);
             conn.release();
             return result.rows;
@@ -39,7 +39,7 @@ export class UsersStore {
         try{
             const conn = await client.connect();
             const encPassword = bcrypt.hashSync(password + BCRYPT_PASSWORD, parseInt((SALT_ROUNDS as unknown) as string));
-            const sql = `INSERT INTO products (firstname, lastname, password) VALUES(${firstname}, ${lastname}, ${encPassword}) RETURNING *;`;
+            const sql = `INSERT INTO users (firstname, lastname, password) VALUES('${firstname}', '${lastname}', '${encPassword}') RETURNING *;`;
             const result = await conn.query(sql);
             conn.release();
             return result.rows;
