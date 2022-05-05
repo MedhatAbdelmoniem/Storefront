@@ -1,5 +1,7 @@
-CREATE TABLE products (
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(64) NOT NULL,
-    price INTEGER NOT NULL
+    firstname VARCHAR(64) NOT NULL,
+    lastName VARCHAR(64) NOT NULL,
+    password VARCHAR(64) NOT NULL
 )
+

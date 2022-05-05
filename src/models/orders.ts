@@ -25,4 +25,16 @@ export class OrdersStore {
             throw new Error(`${err}`)
         }
     }
+
+    async productsInOrder() {
+        try {
+            const conn = await client.connect()
+            const sql = 'SELECT name, price, order_id FROM products INNER JOIN order_products ON product.id = order_products.id'
+            const result = await conn.query(sql)
+            conn.release()
+            return result.rows
+        } catch (err) {
+            throw new Error(`${err}`)
+        }
+    }
 }

@@ -1,6 +1,5 @@
-CREATE TABLE order_products (
+CREATE TABLE products (
     id SERIAL PRIMARY KEY,
-    product_id BIGINT REFERENCES products(id),
-    order_id BIGINT REFERENCES orders(id),
-    quantity INTEGER NOT NULL
+    name VARCHAR(64) NOT NULL,
+    price INTEGER NOT NULL
 )
