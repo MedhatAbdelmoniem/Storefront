@@ -27,7 +27,7 @@ it('should return all products',async ()=>{
 it('create a product', async () => {
     const responseUser = await request.get('/create/user/uda/city/123');
     const token = await responseUser.body.token;
-    const response = await request.get('/create/product/desktop/2000').send({token: token});
+    const response = await request.post('/create/product/desktop/2000').send({token: token});
     expect(response.status).toBe(200);
     
 })
