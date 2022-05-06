@@ -7,7 +7,7 @@ const orders = new OrdersStore;
 const routes = express.Router();
 
 
-routes.get('/order/:userid', async function (req: Request, res: Response) {
+routes.post('/order/:userid', async function (req: Request, res: Response) {
     try {
         jwt.verify(req.body.token, process.env.TOKEN_SECRET as string)
     } catch (err) {

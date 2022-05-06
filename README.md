@@ -20,6 +20,20 @@ ENV=dev <br />
 
 } <br />
 
+now to create the database <br />
+first create a user udacity with the password 123 <br />
+to do this first we run this command in psql <br />
+CREATE USER udacity WITH PASSWORD '123'; <br />
+second we create two databases one to use and the other for testing <br />
+to do this we run those commands in psql <br />
+CREATE DATABASE postgres; <br />
+CREATE DATABASE postgrestest; <br />
+last we grant them permissions <br />
+GRANT ALL PRIVILEGES ON DATABASE postgres TO udacity <br />
+GRANT ALL PRIVILEGES ON DATABASE postgrestest TO udacity <br />
+
+
+
 first to create a user you access this link  <br />
 localhost/3000/create/user/{your firstname}/{your lastname}/{your password} <br />
 you will get a token <br />
@@ -42,3 +56,8 @@ to start the tests for the database and the endpoints <br />
 you type npm run test <br />
 
 the endpoint for the user is tested in the productSpec just to access the token generated <br />
+
+
+# other info
+
+port number = 3000 <br />

@@ -5,7 +5,6 @@ import productsRoutes from './endpoints/products'
 import ordersRoutes from './endpoints/orders'
 
 const app: express.Application = express()
-const address: string = "0.0.0.0:3000"
 
 app.use(bodyParser.json())
 

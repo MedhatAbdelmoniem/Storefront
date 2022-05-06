@@ -7,7 +7,7 @@ const users = new UsersStore;
 const routes = express.Router();
 
 
-routes.get('/users', async function (req: Request, res: Response) {
+routes.post('/users', async function (req: Request, res: Response) {
     try {
         jwt.verify(req.body.token, process.env.TOKEN_SECRET as string)
     } catch (err) {
@@ -19,7 +19,7 @@ routes.get('/users', async function (req: Request, res: Response) {
     res.json(allUsers)
 })
 
-routes.get('/user/:id', async function (req: Request, res: Response) {
+routes.post('/user/:id', async function (req: Request, res: Response) {
     try {
         jwt.verify(req.body.token, process.env.TOKEN_SECRET as string)
     } catch (err) {

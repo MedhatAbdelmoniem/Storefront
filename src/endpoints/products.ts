@@ -16,7 +16,7 @@ routes.get('/product/:id', async function (req: Request, res: Response) {
     res.json(product)
 })
 
-routes.get('/create/product/:name/:price', async function (req: Request, res: Response) {
+routes.post('/create/product/:name/:price', async function (req: Request, res: Response) {
     try {
         jwt.verify(req.body.token, process.env.TOKEN_SECRET as string)
     } catch (err) {
