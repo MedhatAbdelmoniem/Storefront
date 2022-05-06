@@ -52,7 +52,7 @@ export class UsersStore {
     async delete(id: number) {
         try {
             const conn = await client.connect();
-            const sql = `DELETE FROM users WHERE id="${id}";`
+            const sql = `DELETE FROM users WHERE id='${id}';`
             const result = await conn.query(sql);
             conn.release();
             return result.rows;

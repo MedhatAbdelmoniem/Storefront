@@ -37,3 +37,34 @@ it('get the created product', async ()=>{
     const data = await response.body;
     expect(data).toEqual([{id: 2, name: 'desktop', price: 2000}])
 })
+
+it('return all products from endpoint', async ()=>{
+  const response = await request.get('/products');
+  const data = await response.body;
+  expect(data).toEqual([
+    {
+      id: 1,
+      name: 'testing',
+      price: 2000,
+    },
+    {id: 2, name: 'desktop', price: 2000}
+  ])
+})
+
+it('return all products from database', async ()=>{
+  const result = await store.index();
+  expect(result).toEqual([
+    {
+      id: 1,
+      name: 'testing',
+      price: 2000,
+    },
+    {id: 2, name: 'desktop', price: 2000}
+  ]);
+})
+
+it('delete a product from database then see all products minus one', async()=>{
+  const delResult = await store.delete(1);
+  const result = await store.index();
+  expect(result).toEqual([{id: 2, name: 'desktop', price: 2000}]);
+})
