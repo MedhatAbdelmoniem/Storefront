@@ -16,15 +16,15 @@ routes.get('/product/:id', async function (req: Request, res: Response) {
     res.json(product)
 })
 
-routes.post('/create/product/:name/:price', async function (req: Request, res: Response) {
+routes.post('/create/product/', async function (req: Request, res: Response) {
     try {
-        jwt.verify(req.body.token, process.env.TOKEN_SECRET as string)
+        jwt.verify(req.headers.authorization as string, process.env.TOKEN_SECRET as string)
     } catch (err) {
         res.status(401);
         res.json(`Invalid Token ${err}`)
         return;
     }
-    const product = await products.create(req.params.name, (req.params.price as unknown) as number);
+    const product = await products.create(req.body.name, (req.body.price as unknown) as number);
     res.json(product)
 })
 export default routes;

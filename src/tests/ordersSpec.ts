@@ -10,6 +10,6 @@ it('should have a currentOrder method', ()=>{
 })
 
 it('testing the endpoint with no token', async ()=>{
-    const response = await request.post('/order/1');
+    const response = await request.get('/order/1');
     expect(response.status).toEqual(401);
 })

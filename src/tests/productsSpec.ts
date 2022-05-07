@@ -25,9 +25,9 @@ it('should return all products',async ()=>{
 
 
 it('create a product', async () => {
-    const responseUser = await request.get('/create/user/uda/city/123');
-    const token = await responseUser.body.token;
-    const response = await request.post('/create/product/desktop/2000').send({token: token});
+    const responseUser = await request.post('/create/user/').send({firstname: 'uda', lastname: 'city', password: '123'});
+    const token = await responseUser.header.authorization;
+    const response = await request.post('/create/product').set('authorization', token).send({name: 'desktop', price: '2000'});
     expect(response.status).toBe(200);
     
 })

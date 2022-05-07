@@ -7,9 +7,9 @@ const users = new UsersStore;
 const routes = express.Router();
 
 
-routes.post('/users', async function (req: Request, res: Response) {
+routes.get('/users', async function (req: Request, res: Response) {
     try {
-        jwt.verify(req.body.token, process.env.TOKEN_SECRET as string)
+        jwt.verify(req.headers.authorization as string, process.env.TOKEN_SECRET as string)
     } catch (err) {
         res.status(401);
         res.json(`Invalid Token ${err}`)
@@ -19,9 +19,9 @@ routes.post('/users', async function (req: Request, res: Response) {
     res.json(allUsers)
 })
 
-routes.post('/user/:id', async function (req: Request, res: Response) {
+routes.get('/user/:id', async function (req: Request, res: Response) {
     try {
-        jwt.verify(req.body.token, process.env.TOKEN_SECRET as string)
+        jwt.verify(req.headers.authorization as string, process.env.TOKEN_SECRET as string)
     } catch (err) {
         res.status(401);
         res.json(`Invalid Token ${err}`)
@@ -31,9 +31,11 @@ routes.post('/user/:id', async function (req: Request, res: Response) {
     res.json(user)
 })
 
-routes.get('/create/user/:firstname/:lastname/:password', async function (req: Request, res: Response) {
-    const token = jwt.sign({firstname: req.params.firstname, lastname: req.params.lastname}, process.env.TOKEN_SECRET as string)
-    const user = await users.create(req.params.firstname, req.params.lastname, req.params.password);
-    res.json({user: user, token: token})
+routes.post('/create/user/', async function (req: Request, res: Response) {
+    const token = jwt.sign({firstname: req.body.firstname, lastname: req.body.lastname}, process.env.TOKEN_SECRET as string)
+    const user = await users.create(req.body.firstname, req.body.lastname, req.body.password);
+    res.setHeader('Content-Type', 'application/json');
+    res.header('Authorization', token);
+    res.json(user)
 })
 export default routes;

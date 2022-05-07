@@ -17,17 +17,17 @@ it('create method should add a user and check if it exist', async () => {
   });
 
 it('create a user then see if it exist', async ()=>{
-  const responseUser = await request.get('/create/user/t/est/123');
-  const token = await responseUser.body.token;
-  const response = await request.post('/user/3').send({token: token});
+  const responseUser = await request.post('/create/user').send({firstname: 't', lastname: 'est', password:'123'});
+  const token = await responseUser.header.authorization;
+  const response = await request.get('/user/3').set('authorization',token);
   const data = await response.body;
-  expect(data).toEqual([{id: 3, firstname: 't', lastname: 'est', password: responseUser.body.user[0].password}])
+  expect(data).toEqual([{id: 3, firstname: 't', lastname: 'est', password: responseUser.body[0].password}])
 })
 
 it('see that endpoint returns all users', async ()=>{
-  const responseUser = await request.get('/create/user/testing/users/123');
-  const token = await responseUser.body.token;
-  const response = await request.post('/users').send({token: token});
+  const responseUser = await request.post('/create/user').send({firstname: 'testing', lastname: 'users', password: '123'});
+  const token = await responseUser.header.authorization;
+  const response = await request.get('/users').set('authorization',token);
   const data = await response.body;
   expect(data.length).toEqual(4)
 })

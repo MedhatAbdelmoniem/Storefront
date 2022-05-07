@@ -7,9 +7,9 @@ const orders = new OrdersStore;
 const routes = express.Router();
 
 
-routes.post('/order/:userid', async function (req: Request, res: Response) {
+routes.get('/order/:userid', async function (req: Request, res: Response) {
     try {
-        jwt.verify(req.body.token, process.env.TOKEN_SECRET as string)
+        jwt.verify(req.headers.authorization as string, process.env.TOKEN_SECRET as string)
     } catch (err) {
         res.status(401);
         res.json(`Invalid Token ${err}`)
