@@ -61,3 +61,4 @@ the endpoint for the user is tested in the productSpec just to access the token 
 # other info
 
 port number = 3000 <br />
+postgres port number = 5432 <br />

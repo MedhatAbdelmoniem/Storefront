@@ -1,7 +1,8 @@
 {
   "spec_dir": "dist",
   "spec_files": [
-    "../**/tests/*[S]pec.ts"
+    "../**/tests/*[S]pec.ts",
+    "../**/tests/orderSpec/*[S]pec.ts"
   ],
   "helpers": [
     "helpers/**/*.js"
